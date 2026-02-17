@@ -1,0 +1,15 @@
+
+# Data Manipulation and Analysis
+pandas
+numpy
+
+# Machine Learning & Datasets
+scikit-learn
+
+# Visualization
+matplotlib
+seaborn
+
+# Environment & Utilities
+pipreqs
+ipython

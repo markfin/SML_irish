@@ -1,0 +1,40 @@
+
+name: Iris Data Preprocessing Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        pip install pandas scikit-learn
+
+    - name: Run preprocessing script
+      run: python Experiment_SML_irish/src/automate_irish.py
+
+    - name: Configure Git
+      run: |
+        git config user.name "GitHub Actions"
+        git config user.email "github-actions@github.com"
+
+    - name: Commit processed data
+      run: |
+        git add Experiment_SML_irish/data/processed/X_processed.csv
+        git add Experiment_SML_irish/data/processed/y_processed.csv
+        git commit -m "Add processed Iris data" || echo "No changes to commit"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
